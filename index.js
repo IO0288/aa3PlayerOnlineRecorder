@@ -71,9 +71,9 @@ async function queryServer() {
         const currentTime = Math.round(p.raw.time);
         const totalTime = Math.round(existing.raw.time);
         let baseTime = existing.raw.baseTime || 0;
-        // 如果当前计数小于基时间，则判断为发生过断连（断连过的玩家总时间为 baseTime + time）
+        // 如果当前时间小于记录时间，则判断为发生过断连（断连过的玩家总时间为 baseTime + time）
         if (currentTime < totalTime) {
-          baseTime = existing.raw.time;
+          baseTime += existing.raw.time;
         }
 
         // 累加游戏时间（无论玩家是否退出重入，都累加当前游戏时间）
@@ -81,7 +81,8 @@ async function queryServer() {
           raw: {
             baseTime: baseTime,
             score: p.raw.score,
-            time: currentTime
+            time: currentTime,
+            totalTime: baseTime+currentTime
           }
         };
       } else {
