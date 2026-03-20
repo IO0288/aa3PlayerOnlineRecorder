@@ -1,17 +1,22 @@
 {
   "name": "aa3player",
   "version": "1.0.0",
+  "type": "module",
   "description": "ARMA 3 server player polling using gamedig",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "json-server --watch data.json --port 3000"
+    "db": "node db.js",
+    "web": "npm run db & npx serve -l 12244"
   },
-  "keywords": ["arma3", "gamedig", "game-server"],
+  "keywords": [
+    "arma3",
+    "gamedig",
+    "game-server"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gamedig": "^4.3.0",
-    "json-server": "^1.0.0-beta.3"
+    "gamedig": "^4.3.0"
   }
 }
