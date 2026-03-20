@@ -60,6 +60,7 @@ function saveData() {
 
 async function queryServer() {
   try {
+    loadData();
     const state = await gamedig.query(CONFIG);
 
     // 根据 name 更新在线玩家的 raw.time
@@ -107,9 +108,6 @@ async function queryServer() {
     throw error;
   }
 }
-
-// 启动时加载数据
-loadData();
 
 // 每 30 秒轮询一次
 setInterval(queryServer, 30000);
