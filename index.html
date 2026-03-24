@@ -86,13 +86,19 @@
             const name = row.playerName
             if (!name) continue
             const existing = map.get(name)
-            if (!existing || row.timestamp > existing.timestamp) {
+            if (!existing) {
               map.set(name, {
                 playerName: name,
                 totalTime: row.totalTime || 0,
                 lastDate: row.date,
                 timestamp: row.timestamp
               })
+            } else {
+              existing.totalTime += row.totalTime || 0
+              if (row.timestamp > existing.timestamp) {
+                existing.lastDate = row.date
+                existing.timestamp = row.timestamp
+              }
             }
           }
           return Array.from(map.values())
