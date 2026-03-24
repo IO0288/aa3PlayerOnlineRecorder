@@ -105,10 +105,10 @@ async function queryServer() {
     return playerData;
   } catch (error) {
     console.error(`[${new Date().toISOString()}] 查询失败: ${error.message}`);
-    throw error;
+    // throw error;
   }
 }
 
-// 每 30 秒轮询一次
-setInterval(queryServer, 30000);
+// 每 5 分钟轮询一次
+setInterval(queryServer, 5 * 60 * 1000);
 queryServer(); // 立即执行一次
